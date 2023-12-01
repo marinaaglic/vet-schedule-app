@@ -1,0 +1,22 @@
+@import "_colors";
+
+.auth-navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.div-links {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+
+.btn-link {
+  background-color: $bright-blue;
+  color: white;
+  padding: 15px 25px;
+  text-decoration: none;
+  border-radius: 10px;
+  font-family: "Lato", sans-serif;
+}

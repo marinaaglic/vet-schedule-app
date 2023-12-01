@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const BlacklistedToken = require("../models/blacklistedToken");
 const User = require("../models/user");
 const Pet = require("../models/pet");
 
@@ -32,7 +33,7 @@ const register = async (req, res) => {
         //     const petRegistrationPath = `/register-pet/${user._id}`;
         //     res.status(201).send({ message: "User registered. Now you can register your pet.", petRegistrationPath })
     } catch (err) {
-        res.status(400).send(err);
+        res.status(400).send("Registration failed. Please try again.");
     }
 }
 
@@ -58,6 +59,25 @@ const login = async (req, res) => {
     }
 }
 
+const logout = async (req, res) => {
+    const token = req.header("Authorization");
+
+    if (!token) {
+        return res.status(400).send("Token not provided.");
+    }
+
+    try {
+        const justToken = token.replace("Bearer ", "");
+
+        const blacklistedToken = new BlacklistedToken({ token: justToken });
+        await blacklistedToken.save();
+
+        res.send("Logout successful.");
+    } catch (err) {
+        res.status(400).send("Error logging out.");
+    }
+}
+
 const petRegistration = async (req, res) => {
     const { userId } = req.params;
     const { name, type, breed } = req.body;
@@ -71,9 +91,9 @@ const petRegistration = async (req, res) => {
         await pet.save();
         res.status(201).send({ pet });
     } catch (error) {
-        res.status(400).send(error);
+        res.status(400).send("Error while registering your pet. Please try again.");
     }
 
 }
 
-module.exports = { register, login, petRegistration };
+module.exports = { register, login, logout, petRegistration };
