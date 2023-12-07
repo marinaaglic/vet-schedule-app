@@ -1,0 +1,28 @@
+@import "_colors";
+
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 100px;
+}
+
+.login-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.btn-login {
+  background-color: $bright-blue;
+  color: white;
+  padding: 15px 25px;
+  border-radius: 10px;
+  font-family: "Lato", sans-serif;
+  border: 0;
+  font-size: 18px;
+  margin-top: 20px;
+  cursor: pointer;
+}

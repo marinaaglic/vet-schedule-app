@@ -1,0 +1,27 @@
+.input-wrapper {
+  margin-top: 20px;
+}
+
+/* Input style */
+
+/* Label */
+label {
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: #344054;
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* Input field */
+input {
+  font-size: 16px;
+  font-weight: 400;
+  width: 250px;
+  color: #344054;
+  background: #ffffff;
+  border: 1px solid #d0d5dd;
+  border-radius: 8px;
+  padding: 10px 14px;
+}
