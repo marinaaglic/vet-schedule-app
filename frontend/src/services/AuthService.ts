@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
-import { User, AuthResponse, LoginCredentials } from "../types/user.type";
-import { Pet } from "../types/pet.type";
+import { User, AuthResponse, LoginCredentials } from "../types/user";
+import { Pet } from "../types/pet";
 
 const baseURL = "http://localhost:8080/auth";
 

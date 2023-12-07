@@ -1,10 +1,10 @@
-export type User = {
+export interface User {
   firstName: string;
   lastName: string;
   email: string;
   password: string;
   role: "owner" | "veterinarian";
-};
+}
 
 export type LoginCredentials = {
   email: string;

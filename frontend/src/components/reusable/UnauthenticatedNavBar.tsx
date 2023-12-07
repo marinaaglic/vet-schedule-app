@@ -10,7 +10,7 @@ export default function UnauthenticatedNavBar() {
       <Link to="/login" className="btn-link">
         Login
       </Link>
-      <Link to="/register" className="btn-link">
+      <Link to="/registration" className="btn-link">
         Registration
       </Link>
     </nav>

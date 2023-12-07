@@ -1,8 +1,8 @@
-import { User } from "./user.type.ts";
+import { User } from "./user.ts";
 
-export type Pet = {
+export interface Pet {
   name: string;
   type: string;
   breed: string;
   owner: User;
-};
+}
