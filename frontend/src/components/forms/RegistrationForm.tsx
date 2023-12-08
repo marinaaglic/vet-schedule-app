@@ -1,17 +1,34 @@
-import Input from "../reusable/Input";
-import "../../styles/_registrationForm.scss";
+import { useMultiStepForm } from "../../hooks/useMultiStepForm";
+import UserRegistrationForm from "./UserRegistrationForm";
+import PetRegistrationForm from "./PetRegistrationForm";
+import "../../styles/_registrationForms.scss";
+import { FormEvent } from "react";
 
 export default function RegistrationForm() {
+  const { steps, currentStep, step, isFirstStep, isLastStep, back, next } =
+    useMultiStepForm([<UserRegistrationForm />, <PetRegistrationForm />]);
+  function onSubmitHandler(e: FormEvent) {
+    e.preventDefault();
+    next();
+  }
   return (
     <div className="form-wrapper">
-      <form>
-        <Input type="text" label="Name" id="name" />
-        <Input type="text" label="Last Name" id="lastName" />
-        <Input type="email" label="E-mail" id="email" />
-        <Input type="password" label="Password" id="password" />
-        <button className="btn-login" type="submit">
-          Sign Up
-        </button>
+      <form onSubmit={onSubmitHandler}>
+        <div className="div-steps">
+          {currentStep + 1} / {steps.length}
+        </div>
+        {step}
+        <div className="div-btn">
+          {isFirstStep && (
+            <button className="btn-reg" type="button" onClick={back}>
+              Back
+            </button>
+          )}
+
+          <button className="btn-reg" type="submit">
+            {isLastStep ? "Finish" : "Next"}
+          </button>
+        </div>
       </form>
     </div>
   );

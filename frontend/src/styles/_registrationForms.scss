@@ -1,13 +1,5 @@
 @import "_colors";
 
-.form-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  padding: 100px;
-}
-
 .login-form {
   display: flex;
   justify-content: center;
@@ -15,7 +7,7 @@
   flex-direction: column;
 }
 
-.btn-login {
+.btn-reg {
   background-color: $bright-blue;
   color: white;
   padding: 15px 25px;
@@ -25,4 +17,16 @@
   font-size: 18px;
   margin-top: 20px;
   cursor: pointer;
+}
+
+.div-steps {
+  top: 8px;
+  right: 8px;
+}
+
+.div-btn {
+  margin-top: 16px;
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
 }

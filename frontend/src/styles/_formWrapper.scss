@@ -1,0 +1,16 @@
+@import "_colors";
+
+.form-wrapper-h2 {
+  text-align: center;
+  margin: 0;
+  margin-bottom: 32px;
+  font-family: "Lato", sans-serif;
+  color: $text-color;
+}
+
+.div-form-wrapper {
+  display: grid;
+  gap: 16px 8px;
+  justify-content: flex-start;
+  grid-template-columns: auto minmax(auto, 400);
+}
