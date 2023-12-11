@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router";
-import AuthenticatedNavBar from "../components/reusable/AuthenticatedNavBar";
-import UnauthenticatedNavBar from "../components/reusable/UnauthenticatedNavBar";
+import AuthenticatedNavBar from "../components/navbars/AuthenticatedNavBar";
+import UnauthenticatedNavBar from "../components/navbars/UnauthenticatedNavBar";
 import LoginPage from "../pages/LoginPage";
 import HomePage from "../pages/HomePage";
-import RegistrationForm from "../components/forms/RegistrationForm";
+import RegistrationPage from "../pages/RegistrationPage";
 import { useState } from "react";
 
 export default function AppRoutes() {
@@ -15,7 +15,7 @@ export default function AppRoutes() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/registration" element={<RegistrationForm />} />
+          <Route path="/registration" element={<RegistrationPage />} />
         </Routes>
       </div>
     </div>
