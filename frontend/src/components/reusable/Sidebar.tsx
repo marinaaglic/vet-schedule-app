@@ -1,20 +1,12 @@
+import { SidebarType, StepInfoMap } from "../../types/sidebar.ts";
 import "../../styles/_sidebar.scss";
-
-interface SidebarProps {
-  totalSteps: number;
-  currentStep: number;
-}
-
-interface StepInfoMap {
-  [key: number]: string;
-}
 
 const stepInfoMap: StepInfoMap = {
   1: "Your Info",
   2: "Your Pet's Info",
 };
 
-function Sidebar({ totalSteps, currentStep }: SidebarProps) {
+function Sidebar({ totalSteps, currentStep }: SidebarType) {
   const circles = Array.from({ length: totalSteps }, (_, index) => (
     <div
       key={index}
