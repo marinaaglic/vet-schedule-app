@@ -4,10 +4,12 @@ import UnauthenticatedNavBar from "../components/navbars/UnauthenticatedNavBar";
 import LoginPage from "../pages/LoginPage";
 import HomePage from "../pages/HomePage";
 import RegistrationPage from "../pages/RegistrationPage";
-import { useState } from "react";
+import { useContext } from "react";
+import { AuthContext, AuthContextProps } from "../context/AuthContext";
 
 export default function AppRoutes() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { isAuthenticated } = useContext(AuthContext) as AuthContextProps;
+  console.log(isAuthenticated);
   return (
     <div>
       {isAuthenticated ? <AuthenticatedNavBar /> : <UnauthenticatedNavBar />}

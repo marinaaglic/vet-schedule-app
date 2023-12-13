@@ -14,4 +14,5 @@ export type LoginCredentials = {
 export type AuthResponse = {
   message: string;
   token: string;
+  isAuthenticated: boolean;
 };
