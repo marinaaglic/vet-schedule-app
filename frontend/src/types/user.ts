@@ -12,6 +12,7 @@ export type LoginCredentials = {
 };
 
 export type AuthResponse = {
+  userId: string;
   message: string;
   token: string;
   isAuthenticated: boolean;
