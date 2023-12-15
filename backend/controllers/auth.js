@@ -28,7 +28,8 @@ const register = async (req, res) => {
         const token = jwt.sign({ email, role: user.role }, process.env.TOKEN_KEY, { expiresIn: "1h" });
         res.send({
             message: "You are now registered.",
-            token: token
+            token: token,
+            userId: user._id,
         });
         //     const petRegistrationPath = `/register-pet/${user._id}`;
         //     res.status(201).send({ message: "User registered. Now you can register your pet.", petRegistrationPath })
