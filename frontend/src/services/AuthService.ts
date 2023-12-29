@@ -38,7 +38,9 @@ const AuthService = {
         `${baseURL}/login`,
         credentials
       );
-      setAuthenticated(response.data.isAuthenticated);
+      const { token, isAuthenticated } = response.data;
+      localStorage.setItem("token", token);
+      setAuthenticated(isAuthenticated);
       console.log("Login successful. Response:", response.data);
       return response.data;
     } catch (error: any) {
