@@ -32,7 +32,7 @@ export default function LoginForm() {
   return (
     <div className="form-wrapper">
       <form className="login-form" onSubmit={submitHandler}>
-        <h2>Login to your account</h2>
+        <h3>Login to your account</h3>
         <Input
           type="email"
           label="E-mail"
