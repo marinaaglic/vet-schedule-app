@@ -4,7 +4,7 @@ import "../../styles/_formWrapper.scss";
 export default function FormWrapper({ title, children }: FormWrapperType) {
   return (
     <>
-      <h2 className="form-wrapper-h2">{title}</h2>
+      <h3 className="form-wrapper-title">{title}</h3>
       <div className="form-wrapper-div">{children}</div>
     </>
   );

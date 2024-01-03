@@ -9,7 +9,7 @@
 }
 
 .login-form {
-  max-width: 400px;
+  max-width: 500px;
   width: 100%;
   padding: 20px;
   border-radius: 10px;
@@ -19,16 +19,16 @@
 .btn-login {
   background-color: $bright-blue;
   color: white;
-  padding: 15px 25px;
+  padding: 10px 15px;
   border-radius: 10px;
   font-family: "Lato", sans-serif;
   border: 0;
-  font-size: 18px;
+  font-size: 15px;
   margin-top: 20px;
   cursor: pointer;
 }
 
-h2 {
+h3 {
   font-family: "Lato", sans-serif;
   color: $text-color;
 }

@@ -3,11 +3,11 @@
 .btn-reg {
   background-color: $bright-blue;
   color: white;
-  padding: 15px 25px;
+  padding: 10px 15px;
   border-radius: 10px;
   font-family: "Lato", sans-serif;
   border: 0;
-  font-size: 18px;
+  font-size: 15px;
   margin-top: 20px;
   cursor: pointer;
 }
@@ -28,7 +28,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 70vh;
+  max-width: 500px;
+  border-radius: 10px;
+  margin: 50px auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: white;
 }
 
 .progress-bar-sidebar {
