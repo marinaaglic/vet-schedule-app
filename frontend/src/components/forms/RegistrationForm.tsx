@@ -57,7 +57,7 @@ export default function RegistrationForm() {
         <Sidebar totalSteps={steps.length} currentStep={currentStep} />
       </div>
 
-      <div className="form-wrapper">
+      <div>
         <form onSubmit={onSubmitHandler}>
           {step}
           <div className="div-btn">
