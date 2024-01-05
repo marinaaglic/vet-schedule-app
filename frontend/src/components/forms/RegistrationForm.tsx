@@ -68,11 +68,11 @@ export default function RegistrationForm() {
           {step}
           <div className="div-btn">
             {isFirstStep && (
-              <button className="btn-reg" type="button" onClick={back}>
+              <button className="btn-back" type="button" onClick={back}>
                 Back
               </button>
             )}
-            <button className="btn-reg" type="submit">
+            <button className="btn-registration" type="submit">
               {isLastStep ? "Finish" : "Next"}
             </button>
           </div>

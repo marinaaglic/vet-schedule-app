@@ -1,34 +1,41 @@
 @import "_colors";
 
-.auth-navbar {
+.div-auth {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
+  padding: 0.5rem calc((100vw - 1200px) / 2);
 }
 
-.div-links {
-  display: flex;
+.auth-navbar {
   flex-direction: row;
-  gap: 12px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
-.btn-link {
-  background-color: $bright-blue;
+.link-profile,
+.link-appointments {
+  background-color: $primary;
   color: white;
-  padding: 10px 15px;
   text-decoration: none;
+  padding: 10px 15px;
   border-radius: 10px;
-  font-family: "Lato", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 15px;
 }
 
 .btn-logout {
-  background-color: $bright-blue;
+  background-color: $secondary;
   color: white;
-  padding: 10px 15px;
   border: none;
   border-radius: 10px;
-  font-family: "Lato", sans-serif;
+  padding: 10px 15px;
+  font-family: "Poppins", sans-serif;
   font-size: 15px;
   cursor: pointer;
+}
+
+.navbar-divider {
+  border: 0.5px solid $border-color;
+  position: relative;
 }

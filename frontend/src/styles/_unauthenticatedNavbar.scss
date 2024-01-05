@@ -1,16 +1,40 @@
 @import "_colors";
 
-.unauth-navbar {
+.div-unauth {
   display: flex;
-  justify-content: end;
-  gap: 12px;
+  justify-content: space-between;
+  padding: 0.5rem calc((100vw - 1200px) / 2);
 }
 
-.btn-link {
-  background-color: $bright-blue;
+.unauth-navbar {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.link-login,
+.link-registration {
+  background-color: $primary;
   color: white;
-  font-size: 15px;
   text-decoration: none;
   border-radius: 10px;
-  font-family: "Lato", sans-serif;
+  padding: 10px 15px;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+}
+
+.link-home {
+  background-color: $secondary;
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 10px 15px;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+}
+
+.navbar-divider {
+  border: 0.5px solid $border-color;
+  position: relative;
 }
