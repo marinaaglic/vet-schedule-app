@@ -23,6 +23,7 @@ export default function RegistrationForm() {
     name: "",
     type: "",
     breed: "",
+    age: 0,
     owner: "",
   });
   const navigate = useNavigate();

@@ -39,6 +39,12 @@ export default function PetRegistrationForm({
           id="breed"
           onChange={(value) => changeHandler("breed", value)}
         />
+        <Input
+          type="number"
+          label="Age"
+          id="age"
+          onChange={(value) => changeHandler("age", value)}
+        />
       </div>
     </FormWrapper>
   );

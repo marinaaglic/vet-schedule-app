@@ -1,0 +1,11 @@
+@import "_colors";
+
+.homepage-div {
+  h1,
+  h2 {
+    font-family: "Lato", sans-serif;
+    color: $text-color;
+  }
+
+  margin: 20px;
+}
