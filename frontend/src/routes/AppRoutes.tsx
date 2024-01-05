@@ -10,7 +10,6 @@ import PrivateRoute from "../hocs/PrivateRoute";
 
 export default function AppRoutes() {
   const { isAuthenticated } = useContext(AuthContext) as AuthContextProps;
-  console.log(isAuthenticated);
   return (
     <div>
       {isAuthenticated ? <AuthenticatedNavBar /> : <UnauthenticatedNavBar />}

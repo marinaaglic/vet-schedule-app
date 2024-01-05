@@ -23,7 +23,7 @@ export default function LoginForm() {
     try {
       const authResponse = await AuthService.login(user, setAuthenticated);
       setAuthenticated(true);
-      navigate("/home");
+      navigate("/appointments");
       console.log("Login successful. Response:", authResponse);
     } catch (error) {
       console.log("Login failed: ", error);

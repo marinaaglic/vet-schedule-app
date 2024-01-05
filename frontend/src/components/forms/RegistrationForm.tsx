@@ -1,9 +1,10 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useContext } from "react";
 import { useMultiStepForm } from "../../hooks/useMultiStepForm";
 import UserRegistrationForm from "./UserRegistrationForm";
 import PetRegistrationForm from "./PetRegistrationForm";
 import Sidebar from "../reusable/Sidebar";
 import AuthService from "../../services/AuthService";
+import { AuthContext, AuthContextProps } from "../../context/AuthContext";
 import "../../styles/_registrationForms.scss";
 import "../../styles/_sidebar.scss";
 import { Pet } from "../../types/pet";
@@ -26,6 +27,7 @@ export default function RegistrationForm() {
     age: 0,
     owner: "",
   });
+  const { setAuthenticated } = useContext(AuthContext) as AuthContextProps;
   const navigate = useNavigate();
   const { steps, currentStep, step, isFirstStep, isLastStep, back, next } =
     useMultiStepForm([
@@ -37,13 +39,16 @@ export default function RegistrationForm() {
     event.preventDefault();
     if (isLastStep) {
       try {
-        const userResponse = await AuthService.register(userData);
+        const userResponse = await AuthService.register(
+          userData,
+          setAuthenticated
+        );
         const userId = userResponse.userId;
         const petDataWithOwner = { ...petData, owner: userId };
         await AuthService.registerPet(userId, petDataWithOwner);
-
+        setAuthenticated(true);
+        navigate("/appointments");
         console.log("User and pet registration successful!");
-        navigate("/home");
       } catch (error) {
         console.log("Registration failed: ", error);
       }
