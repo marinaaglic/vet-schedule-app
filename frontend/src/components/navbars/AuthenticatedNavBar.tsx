@@ -23,22 +23,22 @@ export default function AuthenticatedNavBar() {
     }
   };
   return (
-    <nav className="auth-navbar">
-      <div className="div-links">
-        <Link to="/" className="btn-link">
-          Home
-        </Link>
-        <Link to="/profile" className="btn-link">
-          Profile
-        </Link>
-        <Link to="/appointmens" className="btn-link">
-          Appointments
-        </Link>
-      </div>
+    <>
+      <div className="div-auth">
+        <nav className="auth-navbar">
+          <Link to="/profile" className="link-profile">
+            Profile
+          </Link>
+          <Link to="/appointmens" className="link-appointments">
+            Appointments
+          </Link>
+        </nav>
 
-      <button className="btn-logout" onClick={logoutHandler}>
-        Logout
-      </button>
-    </nav>
+        <button className="btn-logout" onClick={logoutHandler}>
+          Logout
+        </button>
+      </div>
+      <hr className="navbar-divider" />
+    </>
   );
 }

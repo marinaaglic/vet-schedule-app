@@ -3,16 +3,21 @@ import "../../styles/_unauthenticatedNavbar.scss";
 
 export default function UnauthenticatedNavBar() {
   return (
-    <nav className="unauth-navbar">
-      <Link to="/" className="btn-link">
-        Home
-      </Link>
-      <Link to="/login" className="btn-link">
-        Login
-      </Link>
-      <Link to="/registration" className="btn-link">
-        Registration
-      </Link>
-    </nav>
+    <>
+      <div className="div-unauth">
+        <Link to="/" className="link-home">
+          Home
+        </Link>
+        <nav className="unauth-navbar">
+          <Link to="/login" className="link-login">
+            Login
+          </Link>
+          <Link to="/registration" className="link-registration">
+            Registration
+          </Link>
+        </nav>
+      </div>
+      <hr className="navbar-divider" />
+    </>
   );
 }
