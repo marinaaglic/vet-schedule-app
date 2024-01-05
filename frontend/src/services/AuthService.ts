@@ -5,12 +5,16 @@ import { Pet } from "../types/pet";
 const baseURL = "http://localhost:8080/auth";
 
 const AuthService = {
-  register: async (user: User) => {
+  register: async (user: User, setAuthenticated: (value: boolean) => void) => {
     try {
       const response: AxiosResponse<AuthResponse> = await axios.post(
         `${baseURL}/register`,
         user
       );
+      const { token, isAuthenticated } = response.data;
+      localStorage.setItem("token", token);
+      setAuthenticated(isAuthenticated);
+      console.log("Registration successful. Response:", response.data);
       return response.data;
     } catch (error: any) {
       throw error.response?.data || error.message;
