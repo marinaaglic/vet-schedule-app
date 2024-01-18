@@ -29,7 +29,7 @@ export default function AuthenticatedNavBar() {
           <Link to="/profile" className="link-profile">
             Profile
           </Link>
-          <Link to="/appointmens" className="link-appointments">
+          <Link to="/appointments" className="link-appointments">
             Appointments
           </Link>
         </nav>
