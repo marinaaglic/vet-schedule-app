@@ -9,8 +9,12 @@ const appointmentSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    pending: {
-        type: Boolean
+    description: {
+        type: String,
+    },
+    status: {
+        type: Boolean,
+        default: "pending"
     },
     owner: {
         type: mongoose.Schema.Types.ObjectId,
