@@ -14,7 +14,7 @@ const newAppointment = async (req, res) => {
         time,
         description,
         status,
-        userId
+        user: userId
     });
     try {
         await appointment.save();

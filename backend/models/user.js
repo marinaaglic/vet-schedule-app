@@ -19,8 +19,7 @@ const userSchema = mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ["owner", "veterinarian"],
-        required: true
+        defaulr: "owner",
     }
 
 })

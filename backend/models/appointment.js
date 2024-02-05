@@ -16,7 +16,7 @@ const appointmentSchema = mongoose.Schema({
         type: String,
         default: "pending"
     },
-    owner: {
+    user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: true
