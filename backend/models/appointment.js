@@ -13,7 +13,7 @@ const appointmentSchema = mongoose.Schema({
         type: String,
     },
     status: {
-        type: Boolean,
+        type: String,
         default: "pending"
     },
     owner: {
