@@ -25,4 +25,22 @@ const newAppointment = async (req, res) => {
     }
 }
 
-module.exports = { newAppointment }
+const getAllAppointments = async (req, res) => {
+    try {
+        const appointments = await Appointment.find();
+        res.send(appointments);
+    } catch (err) {
+        res.status(500).send(`Error: ${err.message}`);
+    }
+}
+
+const getMyAppointments = async (req, res) => {
+    try {
+        const appointment = await Appointment.find({ user: req.user._id });
+        res.send(appointment);
+    } catch (err) {
+        res.status(500).send(`Error: ${err.message}`);
+    }
+}
+
+module.exports = { newAppointment, getAllAppointments, getMyAppointments }
