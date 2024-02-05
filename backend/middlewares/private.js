@@ -32,7 +32,7 @@ const authenticate = async (req, res, next) => {
         };
         next();
     } catch (err) {
-        res.status(400).send("Invalid token.");
+        res.status(400).send(`Invalid token. Error: ${err.message}`);
     }
 }
 

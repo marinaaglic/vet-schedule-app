@@ -2,6 +2,7 @@ require("./config/db");
 const express = require("express");
 const cors = require("cors");
 const authRoutes = require("./routes/auth");
+const appointmentRoutes = require("./routes/appointments");
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/auth", authRoutes);
+app.use("/appointments", appointmentRoutes);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

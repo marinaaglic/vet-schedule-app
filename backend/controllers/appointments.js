@@ -3,7 +3,6 @@ const Appointment = require("../models/appointment");
 
 const newAppointment = async (req, res) => {
     const { date, time, description, status } = req.body;
-    const { userId } = req.params;
 
     if (!(date, time)) {
         res.status(400).send("Date and time are required.");
@@ -14,7 +13,7 @@ const newAppointment = async (req, res) => {
         time,
         description,
         status,
-        user: userId
+        user: req.user._id
     });
     try {
         await appointment.save();
@@ -22,7 +21,7 @@ const newAppointment = async (req, res) => {
             message: "Appointment requested."
         })
     } catch (err) {
-        res.status(400).send("Request for appointment failed. Please try again.");
+        res.status(400).send(`Request for appointment failed. Error: ${err.message}`);;
     }
 }
 
