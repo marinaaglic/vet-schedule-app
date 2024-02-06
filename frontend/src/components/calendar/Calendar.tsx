@@ -1,5 +1,10 @@
+import AppointmentForm from "../forms/AppointmentForm";
 type Props = {};
 
 export default function Calendar({}: Props) {
-  return <div>Calendar</div>;
+  return (
+    <div>
+      <AppointmentForm />
+    </div>
+  );
 }
