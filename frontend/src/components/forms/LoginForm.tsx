@@ -11,6 +11,7 @@ export default function LoginForm() {
     email: "",
     password: "",
   });
+  const [error, setError] = useState("");
   const { setAuthenticated } = useContext(AuthContext) as AuthContextProps;
   const navigate = useNavigate();
 
@@ -20,15 +21,28 @@ export default function LoginForm() {
   }
   async function submitHandler(event: FormEvent) {
     event.preventDefault();
-    try {
-      const authResponse = await AuthService.login(user, setAuthenticated);
-      setAuthenticated(true);
-      navigate("/appointments");
-      console.log("Login successful. Response:", authResponse);
-    } catch (error) {
-      console.log("Login failed: ", error);
+
+    if (user.email === "" && user.password === "") {
+      setError("Both e-mail and password are required.");
+    } else if (user.email === "") {
+      setError("E-mail is required.");
+    } else if (user.password === "") {
+      setError("Password is required.");
+    }
+
+    if (user.email !== "" && user.password !== "") {
+      try {
+        const authResponse = await AuthService.login(user, setAuthenticated);
+        setAuthenticated(true);
+        navigate("/appointments");
+        console.log("Login successful. Response:", authResponse);
+      } catch (error) {
+        console.log("Login failed: ", error);
+        setError("Invalid e-mail or password.");
+      }
     }
   }
+
   return (
     <div className="form-wrapper">
       <form className="login-form" onSubmit={submitHandler}>
@@ -47,6 +61,7 @@ export default function LoginForm() {
           name="password"
           onChange={changeHandler}
         />
+        {error && <p className="error">{error}</p>}
         <button className="btn-login" type="submit">
           Sign in
         </button>
