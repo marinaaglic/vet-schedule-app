@@ -5,10 +5,12 @@ import { SetStateAction, ChangeEvent, Dispatch } from "react";
 import { User } from "../../types/user";
 
 interface UserRegistrationFormProps {
+  userData: User;
   setUserData: Dispatch<SetStateAction<User>>;
 }
 
 export default function UserRegistrationForm({
+  userData,
   setUserData,
 }: UserRegistrationFormProps) {
   function changeHandler(
@@ -25,24 +27,28 @@ export default function UserRegistrationForm({
           type="text"
           label="First Name"
           id="firstName"
+          value={userData.firstName}
           onChange={(value) => changeHandler("firstName", value)}
         />
         <Input
           type="text"
           label="Last Name"
           id="lastName"
+          value={userData.lastName}
           onChange={(value) => changeHandler("lastName", value)}
         />
         <Input
           type="email"
           label="E-mail"
           id="email"
+          value={userData.email}
           onChange={(value) => changeHandler("email", value)}
         />
         <Input
           type="password"
           label="Password"
           id="password"
+          value={userData.password}
           onChange={(value) => changeHandler("password", value)}
         />
       </div>

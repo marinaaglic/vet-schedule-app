@@ -27,16 +27,18 @@ export default function RegistrationForm() {
     age: 0,
     owner: "",
   });
+
   const { setAuthenticated } = useContext(AuthContext) as AuthContextProps;
   const navigate = useNavigate();
   const { steps, currentStep, step, isFirstStep, isLastStep, back, next } =
     useMultiStepForm([
-      <UserRegistrationForm setUserData={setUserData} />,
-      <PetRegistrationForm setPetData={setPetData} />,
+      <UserRegistrationForm userData={userData} setUserData={setUserData} />,
+      <PetRegistrationForm petData={petData} setPetData={setPetData} />,
     ]);
 
   async function onSubmitHandler(event: FormEvent) {
     event.preventDefault();
+
     if (isLastStep) {
       try {
         const userResponse = await AuthService.register(
