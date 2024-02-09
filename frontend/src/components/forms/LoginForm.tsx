@@ -61,7 +61,7 @@ export default function LoginForm() {
           name="password"
           onChange={changeHandler}
         />
-        {error && <p className="error">{error}</p>}
+        <p className="error">{error ? `${error}` : ""}</p>
         <button className="btn-login" type="submit">
           Sign in
         </button>

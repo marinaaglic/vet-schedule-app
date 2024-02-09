@@ -9,9 +9,10 @@ function Input(
   return (
     <div className="input-wrapper">
       <label htmlFor={id}>
-        {label} <span className="error">{error ? `${error}` : ""}</span>
+        {label}
+        <span className="error-message-input">{error ? `(${error})` : ""}</span>
       </label>
-      <input id={id} name={id} ref={ref} {...props} />{" "}
+      <input id={id} name={id} ref={ref} {...props} />
     </div>
   );
 }
