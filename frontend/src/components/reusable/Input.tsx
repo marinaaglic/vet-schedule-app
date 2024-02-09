@@ -9,7 +9,7 @@ function Input(
   return (
     <div className="input-wrapper">
       <label htmlFor={id}>
-        {label} {error && <span className="error">({error})</span>}
+        {label} <span className="error">{error ? `${error}` : ""}</span>
       </label>
       <input id={id} name={id} ref={ref} {...props} />{" "}
     </div>

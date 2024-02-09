@@ -104,7 +104,8 @@ export default function RegistrationForm() {
 
       <form onSubmit={onSubmitHandler} className="reg-form">
         {step}
-        {errorMessage && <p className="error-message">{errorMessage}</p>}
+        <p className="error-message">{errorMessage ? `${errorMessage}` : ""}</p>
+
         <div className="div-btn">
           {isFirstStep && (
             <button className="btn-back" type="button" onClick={back}>
