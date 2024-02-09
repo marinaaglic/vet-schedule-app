@@ -27,7 +27,7 @@ export default function RegistrationForm() {
     age: 0,
     owner: "",
   });
-
+  const [errorMessage, setErrorMessage] = useState("");
   const { setAuthenticated } = useContext(AuthContext) as AuthContextProps;
   const navigate = useNavigate();
   const { steps, currentStep, step, isFirstStep, isLastStep, back, next } =
@@ -36,10 +36,43 @@ export default function RegistrationForm() {
       <PetRegistrationForm petData={petData} setPetData={setPetData} />,
     ]);
 
+  function validateUserForm(userData: User) {
+    if (
+      userData.firstName === "" ||
+      userData.lastName === "" ||
+      userData.email === "" ||
+      userData.password === ""
+    ) {
+      setErrorMessage("All fields are required.");
+      return false;
+    }
+    setErrorMessage("");
+    return true;
+  }
+  function validatePetForm(petData: Pet) {
+    if (
+      petData.name === "" ||
+      petData.type === "" ||
+      petData.breed === "" ||
+      petData.age === 0
+    ) {
+      setErrorMessage("All fields are required.");
+      return false;
+    }
+    setErrorMessage("");
+    return true;
+  }
   async function onSubmitHandler(event: FormEvent) {
     event.preventDefault();
 
+    const isUserFormValid = validateUserForm(userData);
+    const isPetFormValid = validatePetForm(petData);
+
     if (isLastStep) {
+      if (!isUserFormValid || !isPetFormValid) {
+        return;
+      }
+
       try {
         const userResponse = await AuthService.register(
           userData,
@@ -55,6 +88,10 @@ export default function RegistrationForm() {
         console.log("Registration failed: ", error);
       }
     } else {
+      if (!isUserFormValid) {
+        return;
+      }
+      setErrorMessage("");
       next();
     }
   }
@@ -65,21 +102,20 @@ export default function RegistrationForm() {
         <Sidebar totalSteps={steps.length} currentStep={currentStep} />
       </div>
 
-      <div>
-        <form onSubmit={onSubmitHandler}>
-          {step}
-          <div className="div-btn">
-            {isFirstStep && (
-              <button className="btn-back" type="button" onClick={back}>
-                Back
-              </button>
-            )}
-            <button className="btn-registration" type="submit">
-              {isLastStep ? "Finish" : "Next"}
+      <form onSubmit={onSubmitHandler} className="reg-form">
+        {step}
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
+        <div className="div-btn">
+          {isFirstStep && (
+            <button className="btn-back" type="button" onClick={back}>
+              Back
             </button>
-          </div>
-        </form>
-      </div>
+          )}
+          <button className="btn-registration" type="submit">
+            {isLastStep ? "Finish" : "Next"}
+          </button>
+        </div>
+      </form>
     </div>
   );
 }

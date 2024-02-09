@@ -16,7 +16,7 @@ const schema = z.object({
   firstName: z.string().min(1, "First Name is required."),
   lastName: z.string().min(1, "Last Name is required."),
   email: z.string().email("Invalid e-mail."),
-  password: z.string().min(8, "Password must be at least 8 characters long."),
+  password: z.string().min(8, "Min. 8 characters long."),
 });
 
 export default function UserRegistrationForm({
@@ -43,6 +43,7 @@ export default function UserRegistrationForm({
               type="text"
               label="First Name"
               id="firstName"
+              error={errors.firstName?.message}
               {...field}
               onChange={(e) => {
                 field.onChange(e);
@@ -54,9 +55,6 @@ export default function UserRegistrationForm({
             />
           )}
         />
-        {errors.firstName && (
-          <p className="error">{errors.firstName.message as string}</p>
-        )}
         <Controller
           name="lastName"
           control={control}
@@ -66,6 +64,7 @@ export default function UserRegistrationForm({
               type="text"
               label="Last Name"
               id="lastName"
+              error={errors.lastName?.message}
               {...field}
               onChange={(e) => {
                 field.onChange(e);
@@ -77,9 +76,6 @@ export default function UserRegistrationForm({
             />
           )}
         />
-        {errors.lastName && (
-          <p className="error">{errors.lastName.message as string}</p>
-        )}
         <Controller
           name="email"
           control={control}
@@ -89,6 +85,7 @@ export default function UserRegistrationForm({
               type="email"
               label="E-mail"
               id="email"
+              error={errors.email?.message}
               {...field}
               onChange={(e) => {
                 field.onChange(e);
@@ -100,9 +97,6 @@ export default function UserRegistrationForm({
             />
           )}
         />
-        {errors.email && (
-          <p className="error">{errors.email.message as string}</p>
-        )}
         <Controller
           name="password"
           control={control}
@@ -112,6 +106,7 @@ export default function UserRegistrationForm({
               type="password"
               label="Password"
               id="password"
+              error={errors.password?.message}
               {...field}
               onChange={(e) => {
                 field.onChange(e);
@@ -123,9 +118,6 @@ export default function UserRegistrationForm({
             />
           )}
         />
-        {errors.password && (
-          <p className="error">{errors.password.message as string}</p>
-        )}
       </div>
     </FormWrapper>
   );

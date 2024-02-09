@@ -24,11 +24,6 @@
   cursor: pointer;
 }
 
-.div-steps {
-  top: 8px;
-  right: 8px;
-}
-
 .div-btn {
   margin-top: 16px;
   display: flex;
@@ -40,13 +35,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 70vh;
+  justify-content: center;
+  align-items: center;
+  height: auto;
   max-width: 500px;
   border-radius: 10px;
-  margin: 50px auto;
+  margin: 30px auto;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding: 20px;
   background-color: white;
   font-weight: 500;
 }
@@ -58,7 +54,8 @@
   margin-right: 20px;
 }
 
-.error {
+.error-message {
   font-family: "Poppins", sans-serif;
   color: #9b59b6;
+  font-size: 13px;
 }

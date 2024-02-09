@@ -34,7 +34,7 @@ const register = async (req, res) => {
         //     const petRegistrationPath = `/register-pet/${user._id}`;
         //     res.status(201).send({ message: "User registered. Now you can register your pet.", petRegistrationPath })
     } catch (err) {
-        res.status(400).send("Registration failed. Please try again.");
+        res.status(400);
     }
 }
 
