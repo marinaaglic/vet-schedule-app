@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setIsAuthenticated(value);
   };
   if (isLoading) {
-    return <div>Loading...</div>; // or your custom loading component
+    return <div>Loading...</div>;
   }
 
   return (
