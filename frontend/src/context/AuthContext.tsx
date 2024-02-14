@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useState } from "react";
+import { ReactNode, createContext, useState, useEffect } from "react";
 
 export interface AuthContextProps {
   isAuthenticated: boolean;
@@ -16,10 +16,19 @@ export const AuthContext = createContext<AuthContextProps>({
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsAuthenticated(!!token);
+    setIsLoading(false);
+  }, []);
   const setAuthenticated = (value: boolean) => {
     setIsAuthenticated(value);
   };
+  if (isLoading) {
+    return <div>Loading...</div>; // or your custom loading component
+  }
+
   return (
     <AuthContext.Provider value={{ isAuthenticated, setAuthenticated }}>
       {children}
