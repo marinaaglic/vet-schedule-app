@@ -84,3 +84,9 @@
   cursor: pointer;
   border: 1px solid $border-color !important;
 }
+
+.rbc-event,
+.rbc-day-slot .rbc-background-event {
+  background-color: $primary !important;
+  color: $text;
+}
