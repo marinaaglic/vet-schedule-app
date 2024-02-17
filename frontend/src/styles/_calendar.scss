@@ -3,16 +3,84 @@
 .btn-plus {
   position: fixed;
   bottom: 20px;
-  right: 20px;
+  right: 55px;
   background-color: $accent;
   color: white;
   border-radius: 50%;
   width: 60px;
   height: 60px;
   font-size: xx-large;
-  display: flex;
   justify-content: center;
   align-items: center;
   border: none;
   cursor: pointer;
+}
+
+.container {
+  display: flex;
+  padding: 0.5rem calc((100vw - 1200px) / 2);
+  height: 100vh;
+}
+
+.div-calendar {
+  flex: 3;
+}
+
+.appointment-form {
+  flex: 1;
+}
+
+.rbc-current-time-indicator {
+  background: $accent !important;
+  height: 2px;
+}
+
+.rbc-time-slot {
+  background-color: #e14ce113;
+}
+
+.rbc-calendar {
+  font-family: "Poppins", sans-serif;
+  color: $text;
+}
+
+.rbc-toolbar button:active,
+.rbc-toolbar button.rbc-active {
+  background-color: $primary !important;
+  color: white !important;
+}
+
+.rbc-btn-group > button:first-child:not(:last-child) {
+  background-color: $secondary;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-family: "Poppins", sans-serif;
+  border: 1px solid $border-color !important;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.rbc-btn-group > button:not(:first-child):not(:last-child) {
+  background-color: $secondary;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-family: "Poppins", sans-serif;
+  border: 0;
+  font-size: 15px;
+  cursor: pointer;
+  border: 1px solid $border-color !important;
+}
+
+.rbc-btn-group > button:last-child:not(:first-child) {
+  background-color: $secondary;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-family: "Poppins", sans-serif;
+  border: 0;
+  font-size: 15px;
+  cursor: pointer;
+  border: 1px solid $border-color !important;
 }
