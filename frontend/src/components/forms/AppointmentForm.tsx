@@ -28,6 +28,23 @@ export default function AppointmentForm({ setShowForm }: AppointmentProps) {
       setError("Time is required.");
     }
 
+    const selectedDate = new Date(appointment.date);
+    const selectedTime = new Date(`01/01/2000 ${appointment.time}`);
+
+    if (selectedDate.getDay() === 0 || selectedDate.getDay() === 6) {
+      setError(
+        "Appointments can only be scheduled on work days (Monday to Friday)."
+      );
+      return;
+    }
+
+    const startTime = new Date("01/01/2000 08:00");
+    const endTime = new Date("01/01/2000 20:00");
+    if (selectedTime < startTime || selectedTime > endTime) {
+      setError("Appointments can only be scheduled between 8am and 8pm.");
+      return;
+    }
+
     if (appointment.date !== "" && appointment.time !== "") {
       try {
         const appointmentResponse = await AppointmentService.newAppointment(
