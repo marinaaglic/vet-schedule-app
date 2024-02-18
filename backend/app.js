@@ -1,8 +1,9 @@
 require("./config/db");
 const express = require("express");
 const cors = require("cors");
-const authRoutes = require("./routes/auth");
-const appointmentRoutes = require("./routes/appointments");
+const authRoutes = require("./routes/authRoutes");
+const appointmentRoutes = require("./routes/appointmentsRoutes");
+const userRoutes = require("./routes/usersRoutes");
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/auth", authRoutes);
 app.use("/appointments", appointmentRoutes);
+app.use("/profile", userRoutes);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
