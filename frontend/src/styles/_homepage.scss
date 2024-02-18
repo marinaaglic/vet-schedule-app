@@ -1,6 +1,7 @@
 @import "_colors";
 
 .homepage-div {
+  padding: 0.5rem calc((100vw - 1200px) / 2);
   h1,
   h2 {
     font-family: "Poppins", sans-serif;

@@ -1,3 +1,5 @@
+import { Pet } from "./pet";
+
 export interface User {
   firstName: string;
   lastName: string;
@@ -17,3 +19,8 @@ export type AuthResponse = {
   token: string;
   isAuthenticated: boolean;
 };
+
+export interface UserProfileProps {
+  user: User;
+  pets: Pet[];
+}
