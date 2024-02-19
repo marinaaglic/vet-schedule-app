@@ -28,10 +28,13 @@
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   background: linear-gradient(to right, $secondary 25%, white 25%);
   //padding-left: 15%;
-  max-width: 350px;
+  max-width: 450px;
   width: 100%;
 
   p {
     margin-left: 30%;
+  }
+  @media (max-width: 786px) {
+    max-width: 300px;
   }
 }
