@@ -22,8 +22,7 @@ function ProfilePage({}: UserProfileProps) {
   }
   return (
     <div className="profile-container">
-      <h1>Profile page</h1>
-      <h3> Welcome {userData?.firstName}!</h3>
+      <h2> Welcome {userData?.firstName}!</h2>
       <div className="div-profile">
         <div className="div-user">
           <p>First name: {userData?.firstName}</p>
