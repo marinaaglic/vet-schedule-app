@@ -1,4 +1,5 @@
 @import "_colors";
+@import "_media-queries";
 
 .input-wrapper {
   margin-top: 20px;
@@ -11,17 +12,27 @@ label {
   color: $text;
   display: block;
   margin-bottom: 8px;
+
+  @include medium {
+    font-size: 14px;
+  }
 }
 
 input {
   font-size: 15px;
-  width: 250px;
-  height: 10px;
+  width: 100%;
+  max-width: 250px;
+  height: auto;
   color: $text;
   background: #ffffff;
   border: 1px solid $border-color;
   border-radius: 6px;
   padding: 10px 14px;
+
+  @include medium {
+    padding: 8px;
+    width: 80%;
+  }
 }
 
 .error-message-input {

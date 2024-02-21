@@ -40,3 +40,19 @@ h3 {
   font-size: 13px;
   height: 15px;
 }
+
+@media (max-width: 786px) {
+  .form-wrapper {
+    padding: 10%;
+  }
+
+  .login-form {
+    padding: 10px;
+  }
+
+  .btn-login,
+  h3,
+  .error {
+    font-size: 14px;
+  }
+}
