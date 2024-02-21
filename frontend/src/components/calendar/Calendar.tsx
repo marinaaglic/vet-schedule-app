@@ -29,11 +29,11 @@ export default function Calendar({}: BigCalendarAppointment) {
 
   useEffect(() => {
     getAllAppointments();
-  }, []);
+  }, [appointments]);
 
   async function getAllAppointments(): Promise<void> {
     try {
-      const appointmentsData = await AppointmentService.viewAllAppointments();
+      const appointmentsData = await AppointmentService.viewMyAppointments();
 
       const formattedAppointments: BigCalendarAppointment[] =
         appointmentsData.map((appointment) => {

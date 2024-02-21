@@ -34,6 +34,20 @@ const AppointmentService = {
       throw error.response?.data || error.message;
     }
   },
+  viewMyAppointments: async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const response: AxiosResponse<Appointment[]> = await axios.get(
+        `${baseURL}/my-appointments`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      return response.data;
+    } catch (error: any) {
+      throw error.response?.data || error.message;
+    }
+  },
 };
 
 export default AppointmentService;

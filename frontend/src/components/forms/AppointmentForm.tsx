@@ -14,6 +14,7 @@ export default function AppointmentForm({ setShowForm }: AppointmentProps) {
     user: "",
   });
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   function changeHandler(event: ChangeEvent<HTMLInputElement>) {
     event.preventDefault();
     setAppointment({ ...appointment, [event.target.name]: event.target.value });
@@ -50,6 +51,7 @@ export default function AppointmentForm({ setShowForm }: AppointmentProps) {
         const appointmentResponse = await AppointmentService.newAppointment(
           appointment
         );
+        setSuccess("Your appointment has been scheduled!");
         console.log("Appointment scheduled.", appointmentResponse);
       } catch (error) {
         console.log("Appointment schedule failed: ", error);
@@ -82,6 +84,7 @@ export default function AppointmentForm({ setShowForm }: AppointmentProps) {
           onChange={changeHandler}
         />
         <p className="error">{error ? `${error}` : ""}</p>
+        <p className="success">{success ? `${success}` : ""}</p>
         <div className="button-div">
           <button
             type="button"
