@@ -36,11 +36,42 @@ const getAllAppointments = async (req, res) => {
 
 const getMyAppointments = async (req, res) => {
     try {
-        const appointment = await Appointment.find({ user: req.user._id });
-        res.send(appointment);
+        const appointments = await Appointment.find({ user: req.user._id });
+        res.send(appointments);
     } catch (err) {
         res.status(500).send(`Error: ${err.message}`);
     }
 }
 
-module.exports = { newAppointment, getAllAppointments, getMyAppointments }
+const getAppointmentDetails = async (req, res) => {
+    const { id } = req.params;
+    if (!id) {
+        return res.status(400).send("Appointment ID is required.");
+    }
+    try {
+        const appointment = await Appointment.findById(id);
+        if (!appointment) {
+            return res.status(404).send("Appointment not found.");
+        }
+
+        res.send(appointment)
+    } catch (err) {
+        res.status(500).send(`Error: ${err.message}`);
+    }
+}
+
+const deleteAppointment = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const appointment = Appointment.findByIdAndDelete(id);
+
+        if (!appointment) {
+            return res.status(404).send("Appointment not found.");
+        }
+        res.send("Appointment deleted successfully.");
+    } catch (err) {
+        res.status(500).send(`Error: ${err.message}`);
+    }
+}
+module.exports = { newAppointment, getAllAppointments, getMyAppointments, getAppointmentDetails }

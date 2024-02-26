@@ -7,6 +7,7 @@ import AppointmentService from "../../services/AppointmentService";
 
 export default function AppointmentForm({ setShowForm }: AppointmentProps) {
   const [appointment, setAppointment] = useState<Appointment>({
+    _id: "",
     date: "",
     time: "",
     description: "",

@@ -5,10 +5,12 @@ import "../../styles/_calendar.scss";
 import { Calendar as BigCalendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import AppointmentDetails from "./AppointmentDetails";
 
 const localizer = momentLocalizer(moment);
 
 interface BigCalendarAppointment {
+  id: string;
   title: string;
   start: Date;
   end: Date;
@@ -21,6 +23,9 @@ export default function Calendar({}: BigCalendarAppointment) {
   const [appointments, setAppointments] = useState<BigCalendarAppointment[]>(
     []
   );
+  const [selectedAppointmentId, setSelectedAppointmentId] = useState<
+    string | null
+  >(null);
 
   const minTime = new Date();
   minTime.setHours(8, 0, 0);
@@ -40,6 +45,7 @@ export default function Calendar({}: BigCalendarAppointment) {
           const start = new Date(appointment.date + "T" + appointment.time);
           const end = new Date(start.getTime() + 45 * 60000);
           return {
+            id: appointment._id,
             title: appointment.description,
             start: start,
             end: end,
@@ -62,6 +68,7 @@ export default function Calendar({}: BigCalendarAppointment) {
           events={appointments}
           min={minTime}
           max={maxTime}
+          onSelectEvent={(event) => setSelectedAppointmentId(event.id)}
         />
       </div>
       <button className="btn-plus" onClick={() => setShowForm(!showForm)}>
@@ -70,6 +77,11 @@ export default function Calendar({}: BigCalendarAppointment) {
       {showForm && (
         <div className="appointment-form">
           <AppointmentForm setShowForm={setShowForm} />
+        </div>
+      )}
+      {selectedAppointmentId && (
+        <div className="appointment-details">
+          <AppointmentDetails appointmentId={selectedAppointmentId} />
         </div>
       )}
     </div>

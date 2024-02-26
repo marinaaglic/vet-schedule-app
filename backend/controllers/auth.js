@@ -91,7 +91,7 @@ const petRegistration = async (req, res) => {
         const pet = new Pet({ name, breed, type, age, owner: userId });
         await pet.save();
         res.status(201).send({ pet });
-    } catch (error) {
+    } catch (err) {
         res.status(400).send("Error while registering your pet. Please try again.");
     }
 
