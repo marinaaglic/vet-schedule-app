@@ -14,36 +14,35 @@ export default function AppointmentForm({ setShowForm }: AppointmentProps) {
     status: "pending",
     user: "",
   });
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  const [message, setMessage] = useState("");
   function changeHandler(event: ChangeEvent<HTMLInputElement>) {
     event.preventDefault();
     setAppointment({ ...appointment, [event.target.name]: event.target.value });
   }
   async function submitHandler(event: FormEvent) {
     event.preventDefault();
-    if (appointment.date === "" && appointment.time === "") {
-      setError("Both date and time are required.");
-    } else if (appointment.date === "") {
-      setError("Date is required.");
-    } else if (appointment.time === "") {
-      setError("Time is required.");
-    }
 
     const selectedDate = new Date(appointment.date);
     const selectedTime = new Date(`01/01/2000 ${appointment.time}`);
+    const startTime = new Date("01/01/2000 08:00");
+    const endTime = new Date("01/01/2000 20:00");
 
-    if (selectedDate.getDay() === 0 || selectedDate.getDay() === 6) {
-      setError(
+    if (appointment.date === "" && appointment.time === "") {
+      setMessage("Both date and time are required.");
+      return;
+    } else if (appointment.date === "") {
+      setMessage("Date is required.");
+      return;
+    } else if (appointment.time === "") {
+      setMessage("Time is required.");
+      return;
+    } else if (selectedDate.getDay() === 0 || selectedDate.getDay() === 6) {
+      setMessage(
         "Appointments can only be scheduled on work days (Monday to Friday)."
       );
       return;
-    }
-
-    const startTime = new Date("01/01/2000 08:00");
-    const endTime = new Date("01/01/2000 20:00");
-    if (selectedTime < startTime || selectedTime > endTime) {
-      setError("Appointments can only be scheduled between 8am and 8pm.");
+    } else if (selectedTime < startTime || selectedTime > endTime) {
+      setMessage("Appointments can only be scheduled between 8am and 8pm.");
       return;
     }
 
@@ -52,7 +51,7 @@ export default function AppointmentForm({ setShowForm }: AppointmentProps) {
         const appointmentResponse = await AppointmentService.newAppointment(
           appointment
         );
-        setSuccess("Your appointment has been scheduled!");
+        setMessage("Your appointment has been scheduled!");
         console.log("Appointment scheduled.", appointmentResponse);
       } catch (error) {
         console.log("Appointment schedule failed: ", error);
@@ -84,8 +83,7 @@ export default function AppointmentForm({ setShowForm }: AppointmentProps) {
           name="time"
           onChange={changeHandler}
         />
-        <p className="error">{error ? `${error}` : ""}</p>
-        <p className="success">{success ? `${success}` : ""}</p>
+        <p className="message">{message ? `${message}` : ""}</p>
         <div className="button-div">
           <button
             type="button"

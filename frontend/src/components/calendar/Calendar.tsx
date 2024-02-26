@@ -20,6 +20,7 @@ interface BigCalendarAppointment {
 
 export default function Calendar({}: BigCalendarAppointment) {
   const [showForm, setShowForm] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
   const [appointments, setAppointments] = useState<BigCalendarAppointment[]>(
     []
   );
@@ -68,10 +69,20 @@ export default function Calendar({}: BigCalendarAppointment) {
           events={appointments}
           min={minTime}
           max={maxTime}
-          onSelectEvent={(event) => setSelectedAppointmentId(event.id)}
+          onSelectEvent={(event) => {
+            setSelectedAppointmentId(event.id);
+            setShowDetails(true);
+            setShowForm(false);
+          }}
         />
       </div>
-      <button className="btn-plus" onClick={() => setShowForm(!showForm)}>
+      <button
+        className="btn-plus"
+        onClick={() => {
+          setShowForm(!showForm);
+          setShowDetails(false);
+        }}
+      >
         +
       </button>
       {showForm && (
@@ -79,9 +90,12 @@ export default function Calendar({}: BigCalendarAppointment) {
           <AppointmentForm setShowForm={setShowForm} />
         </div>
       )}
-      {selectedAppointmentId && (
+      {selectedAppointmentId && showDetails && (
         <div className="appointment-details">
-          <AppointmentDetails appointmentId={selectedAppointmentId} />
+          <AppointmentDetails
+            appointmentId={selectedAppointmentId}
+            setShowAppointmentDetails={setShowDetails}
+          />
         </div>
       )}
     </div>

@@ -64,7 +64,7 @@ const deleteAppointment = async (req, res) => {
     const { id } = req.params;
 
     try {
-        const appointment = Appointment.findByIdAndDelete(id);
+        const appointment = await Appointment.findByIdAndDelete(id);
 
         if (!appointment) {
             return res.status(404).send("Appointment not found.");
@@ -74,4 +74,4 @@ const deleteAppointment = async (req, res) => {
         res.status(500).send(`Error: ${err.message}`);
     }
 }
-module.exports = { newAppointment, getAllAppointments, getMyAppointments, getAppointmentDetails }
+module.exports = { newAppointment, getAllAppointments, getMyAppointments, getAppointmentDetails, deleteAppointment }

@@ -62,6 +62,20 @@ const AppointmentService = {
       throw error.response?.data || error.message;
     }
   },
+  deleteAppointment: async (appointmentId: String) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response: AxiosResponse<Appointment> = await axios.delete(
+        `${baseURL}/appointment/${appointmentId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      return response.data;
+    } catch (error: any) {
+      throw error.response?.data || error.message;
+    }
+  },
 };
 
 export default AppointmentService;
