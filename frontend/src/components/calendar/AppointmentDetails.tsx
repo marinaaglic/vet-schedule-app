@@ -4,6 +4,7 @@ import { Appointment } from "../../types/appointment";
 import Input from "../reusable/Input";
 import "../../styles/_appointmentDetails.scss";
 import { FaTrashCan } from "react-icons/fa6";
+import Modal from "../reusable/Modal";
 
 export default function AppointmentDetails({
   appointmentId,
@@ -13,11 +14,12 @@ export default function AppointmentDetails({
   setShowAppointmentDetails: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const [appointmentDetails, setAppointmentDetails] = useState<Appointment>();
-  //const [showConfirmation, setShowConfirmation] = useState(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   useEffect(() => {
     getDetailsHandler();
   }, [appointmentId]);
+
   async function getDetailsHandler(): Promise<void> {
     try {
       const responseData = await AppointmentService.viewAppointmentDetails(
@@ -38,13 +40,18 @@ export default function AppointmentDetails({
   }
   return (
     <div className="div-wrapper-appointment">
+      <Modal
+        open={showModal}
+        onClose={() => setShowModal(!showModal)}
+        onDelete={deleteAppointmentHandler}
+      >
+        <div>Are you sure you want to delete this appointment?</div>
+      </Modal>
       <FaTrashCan
         className="icon-trash"
-        onClick={() => deleteAppointmentHandler()}
+        onClick={() => setShowModal(!showModal)}
       />
-
       <h3>Appointment Details</h3>
-
       {appointmentDetails && (
         <div className="appointment-details">
           <Input
