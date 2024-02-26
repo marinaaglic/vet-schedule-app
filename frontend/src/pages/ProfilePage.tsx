@@ -2,10 +2,9 @@ import { useEffect, useState } from "react";
 import ProfileService from "../services/ProfileService";
 import { User } from "../types/user";
 import { Pet } from "../types/pet";
-import { UserProfileProps } from "../types/user";
 import "../styles/_profilePage.scss";
 
-function ProfilePage({}: UserProfileProps) {
+function ProfilePage() {
   const [userData, setUserData] = useState<User>();
   const [petData, setPetData] = useState<Pet[]>();
   useEffect(() => {

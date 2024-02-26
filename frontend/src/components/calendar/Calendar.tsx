@@ -6,24 +6,14 @@ import { Calendar as BigCalendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import AppointmentDetails from "./AppointmentDetails";
+import { BigCalendarProps } from "../../types/calendar";
 
 const localizer = momentLocalizer(moment);
 
-interface BigCalendarAppointment {
-  id: string;
-  title: string;
-  start: Date;
-  end: Date;
-  status: string;
-  user: string;
-}
-
-export default function Calendar({}: BigCalendarAppointment) {
+export default function Calendar() {
   const [showForm, setShowForm] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
-  const [appointments, setAppointments] = useState<BigCalendarAppointment[]>(
-    []
-  );
+  const [appointments, setAppointments] = useState<BigCalendarProps[]>([]);
   const [selectedAppointmentId, setSelectedAppointmentId] = useState<
     string | null
   >(null);
@@ -41,8 +31,8 @@ export default function Calendar({}: BigCalendarAppointment) {
     try {
       const appointmentsData = await AppointmentService.viewMyAppointments();
 
-      const formattedAppointments: BigCalendarAppointment[] =
-        appointmentsData.map((appointment) => {
+      const formattedAppointments: BigCalendarProps[] = appointmentsData.map(
+        (appointment) => {
           const start = new Date(appointment.date + "T" + appointment.time);
           const end = new Date(start.getTime() + 45 * 60000);
           return {
@@ -53,7 +43,8 @@ export default function Calendar({}: BigCalendarAppointment) {
             status: appointment.status,
             user: appointment.user,
           };
-        });
+        }
+      );
 
       setAppointments(formattedAppointments);
     } catch (error) {
