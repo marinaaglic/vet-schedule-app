@@ -2,6 +2,8 @@
 
 .homepage-div {
   padding: 0.5rem calc((100vw - 1200px) / 2);
+  display: flex;
+  justify-content: space-around;
   h1,
   h2 {
     font-family: "Poppins", sans-serif;
@@ -9,4 +11,47 @@
   }
 
   margin: 20px;
+}
+
+.div-content {
+  width: 500px;
+  font-family: "Poppins", sans-serif;
+  color: $text;
+}
+
+.sign-in-content {
+  margin-bottom: 30px;
+}
+
+.sign-up-content {
+  margin-top: 30px;
+}
+
+.img-container {
+  padding: 10px;
+  width: 400px;
+  height: 400px;
+  border-radius: 10px;
+}
+
+.dog-img {
+  width: 100%;
+  height: auto;
+}
+
+.link-login-homepage {
+  background-color: $primary;
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 10px 15px;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+}
+
+.link-registration-homepage {
+  color: $accent;
+  padding-left: 5px;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
 }
