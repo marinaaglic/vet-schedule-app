@@ -74,4 +74,22 @@ const deleteAppointment = async (req, res) => {
         res.status(500).send(`Error: ${err.message}`);
     }
 }
-module.exports = { newAppointment, getAllAppointments, getMyAppointments, getAppointmentDetails, deleteAppointment }
+
+const updateAppointment = async (req, res) => {
+    const { id } = req.params;
+    const data = req.body;
+
+    const appointment = {
+        date: data.date,
+        time: data.time,
+        description: data.description,
+    }
+
+    try {
+        const updatedAppointment = await Appointment.findByIdAndUpdate(id, appointment, { new: true });
+        res.send(updatedAppointment);
+    } catch (err) {
+        res.status(500).send(`Error: ${err.message}`);
+    }
+}
+module.exports = { newAppointment, getAllAppointments, getMyAppointments, getAppointmentDetails, deleteAppointment, updateAppointment }
