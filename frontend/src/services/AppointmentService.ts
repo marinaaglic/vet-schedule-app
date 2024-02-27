@@ -8,7 +8,7 @@ const AppointmentService = {
   newAppointment: async (appointment: Appointment) => {
     try {
       const token = localStorage.getItem("token");
-      const response: AxiosResponse<AuthResponse> = await axios.post(
+      const response: AxiosResponse<Appointment> = await axios.post(
         `${baseURL}/new-appointment`,
         appointment,
         {
@@ -67,6 +67,20 @@ const AppointmentService = {
       const token = localStorage.getItem("token");
       const response: AxiosResponse<Appointment> = await axios.delete(
         `${baseURL}/appointment/${appointmentId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      return response.data;
+    } catch (error: any) {
+      throw error.response?.data || error.message;
+    }
+  },
+  updateAppointment: async (appointmentId: String) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response: AxiosResponse<AuthResponse> = await axios.put(
+        `${baseURL}/appointment-edit/${appointmentId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

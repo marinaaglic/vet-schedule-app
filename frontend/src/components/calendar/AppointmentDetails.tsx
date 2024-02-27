@@ -4,6 +4,7 @@ import { Appointment } from "../../types/appointment";
 import Input from "../reusable/Input";
 import "../../styles/_appointmentDetails.scss";
 import { FaTrashCan } from "react-icons/fa6";
+import { FaEdit } from "react-icons/fa";
 import Modal from "../reusable/Modal";
 
 export default function AppointmentDetails({
@@ -47,10 +48,13 @@ export default function AppointmentDetails({
       >
         <div>Are you sure you want to delete this appointment?</div>
       </Modal>
-      <FaTrashCan
-        className="icon-trash"
-        onClick={() => setShowModal(!showModal)}
-      />
+      <div className="icons-container">
+        <FaEdit className="icon-edit" />
+        <FaTrashCan
+          className="icon-trash"
+          onClick={() => setShowModal(!showModal)}
+        />
+      </div>
       <h3>Appointment Details</h3>
       {appointmentDetails && (
         <div className="appointment-details">
