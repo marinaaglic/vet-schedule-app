@@ -1,6 +1,5 @@
 import axios, { AxiosResponse } from "axios";
 import { Appointment } from "../types/appointment";
-import { AuthResponse } from "../types/user";
 
 const baseURL = "http://localhost:8080/appointments";
 
@@ -76,11 +75,15 @@ const AppointmentService = {
       throw error.response?.data || error.message;
     }
   },
-  updateAppointment: async (appointmentId: String) => {
+  updateAppointment: async (
+    appointmentId: String,
+    appointment: Appointment
+  ) => {
     try {
       const token = localStorage.getItem("token");
-      const response: AxiosResponse<AuthResponse> = await axios.put(
+      const response: AxiosResponse<Appointment> = await axios.put(
         `${baseURL}/appointment-edit/${appointmentId}`,
+        appointment,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

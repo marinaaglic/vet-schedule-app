@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { ChangeEvent, useState, useEffect } from "react";
 import AppointmentService from "../../services/AppointmentService";
 import { Appointment } from "../../types/appointment";
 import Input from "../reusable/Input";
@@ -15,7 +15,17 @@ export default function AppointmentDetails({
   setShowAppointmentDetails: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const [appointmentDetails, setAppointmentDetails] = useState<Appointment>();
-  const [showModal, setShowModal] = useState<boolean>(false);
+  const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
+  const [showUpdateModal, setShowUpdateModal] = useState<boolean>(false);
+  const [isReadonly, setIsReadonly] = useState<boolean>(true);
+  const [appointment, setAppointment] = useState<Appointment>({
+    _id: "",
+    date: "",
+    time: "",
+    description: "",
+    status: "pending",
+    user: "",
+  });
 
   useEffect(() => {
     getDetailsHandler();
@@ -27,6 +37,7 @@ export default function AppointmentDetails({
         appointmentId
       );
       setAppointmentDetails(responseData);
+      setAppointment(responseData);
     } catch (error) {
       console.error("Error fetching appointment details:", error);
     }
@@ -39,42 +50,83 @@ export default function AppointmentDetails({
       console.log("Error while deleting appointment:", error);
     }
   }
+  async function updateAppointmentHandler(): Promise<void> {
+    try {
+      const appointmentResponse = await AppointmentService.updateAppointment(
+        appointmentId,
+        appointment
+      );
+      setAppointmentDetails(appointmentResponse);
+      setIsReadonly(true);
+    } catch (error) {
+      console.log("Appointment schedule failed: ", error);
+    }
+  }
+  function changeHandler(event: ChangeEvent<HTMLInputElement>) {
+    event.preventDefault();
+    const { name, value } = event.target;
+    setAppointment((prevAppointment) => ({
+      ...prevAppointment,
+      [name]: value,
+    }));
+  }
   return (
     <div className="div-wrapper-appointment">
       <Modal
-        open={showModal}
-        onClose={() => setShowModal(!showModal)}
-        onDelete={deleteAppointmentHandler}
-      >
-        <div>Are you sure you want to delete this appointment?</div>
-      </Modal>
+        title="Delete Appointment"
+        open={showDeleteModal}
+        onClose={() => setShowDeleteModal(!showDeleteModal)}
+        onAction={deleteAppointmentHandler}
+        buttonText="Delete"
+        divText="Are you sure you want to delete this appointment?"
+      />
+      <Modal
+        title="Update Appointment"
+        open={showUpdateModal}
+        onClose={() => setShowUpdateModal(!showUpdateModal)}
+        onAction={updateAppointmentHandler}
+        buttonText="Update"
+        divText="Are you sure you want to make changes to this appointment?"
+      />
       <div className="icons-container">
-        <FaEdit className="icon-edit" />
+        <FaEdit
+          className="icon-edit"
+          onClick={() => setIsReadonly((prevState) => !prevState)}
+        />
         <FaTrashCan
           className="icon-trash"
-          onClick={() => setShowModal(!showModal)}
+          onClick={() => setShowDeleteModal(!showDeleteModal)}
         />
       </div>
       <h3>Appointment Details</h3>
       {appointmentDetails && (
         <div className="appointment-details">
           <Input
+            type="text"
             label="Description"
             id="description"
-            value={appointmentDetails.description}
-            readOnly
+            name="description"
+            defaultValue={appointmentDetails.description}
+            readOnly={isReadonly}
+            onChange={changeHandler}
           />
           <Input
+            type="date"
             label="Date"
             id="date"
-            value={appointmentDetails.date}
-            readOnly
+            name="date"
+            defaultValue={appointmentDetails.date}
+            readOnly={isReadonly}
+            onChange={changeHandler}
           />
           <Input
+            type="time"
             label="Time"
             id="time"
-            value={appointmentDetails.time}
-            readOnly
+            name="time"
+            defaultValue={appointmentDetails.time}
+            readOnly={isReadonly}
+            onChange={changeHandler}
           />
         </div>
       )}
@@ -86,7 +138,9 @@ export default function AppointmentDetails({
         >
           Close
         </button>
-        <button className="btn-save">Save</button>
+        <button className="btn-save" onClick={() => setShowUpdateModal(true)}>
+          Save
+        </button>
       </div>
     </div>
   );
