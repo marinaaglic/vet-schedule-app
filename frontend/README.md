@@ -17,7 +17,7 @@ This application is designed to schedule appointments for pets. It allows users 
 - Appointment Scheduling: Users can schedule appointments for their pets.
 - Appointment Editing: Users can edit the details of their scheduled appointments.
 - Appointment Deletion: Users can delete their scheduled appointments.
-- Profile Viewing: Users can view their profiles.
+- Profile Viewing: Users can view their profile.
 
 ## Setup
 
