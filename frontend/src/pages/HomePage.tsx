@@ -1,5 +1,5 @@
 import "../styles/_homepage.scss";
-import landingPageImg from "../../public/landing-page-svg.svg";
+import landingPageImg from "/landing-page-svg.svg";
 import { Link } from "react-router-dom";
 
 function HomePage() {
