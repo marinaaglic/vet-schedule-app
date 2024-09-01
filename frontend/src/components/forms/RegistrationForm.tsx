@@ -20,13 +20,9 @@ export default function RegistrationForm() {
     role: "owner" as const,
   });
 
-  const [petData, setPetData] = useState<Pet>({
-    name: "",
-    type: "",
-    breed: "",
-    age: 0,
-    owner: "",
-  });
+  const [petData, setPetData] = useState<Pet[]>([
+    { name: "", type: "", breed: "", age: 0, owner: "" },
+  ]);
   const [errorMessage, setErrorMessage] = useState("");
   const { setAuthenticated } = useContext(AuthContext) as AuthContextProps;
   const navigate = useNavigate();
@@ -49,15 +45,17 @@ export default function RegistrationForm() {
     setErrorMessage("");
     return true;
   }
-  function validatePetForm(petData: Pet) {
-    if (
-      petData.name === "" ||
-      petData.type === "" ||
-      petData.breed === "" ||
-      petData.age === 0
-    ) {
-      setErrorMessage("All fields are required.");
-      return false;
+  function validatePetForm(petData: Pet[]) {
+    for (const pet of petData) {
+      if (
+        pet.name === "" ||
+        pet.type === "" ||
+        pet.breed === "" ||
+        pet.age === 0
+      ) {
+        setErrorMessage("All fields are required.");
+        return false;
+      }
     }
     setErrorMessage("");
     return true;
@@ -66,21 +64,25 @@ export default function RegistrationForm() {
     event.preventDefault();
 
     const isUserFormValid = validateUserForm(userData);
-    const isPetFormValid = validatePetForm(petData);
 
     if (isLastStep) {
+      const isPetFormValid = validatePetForm(petData);
       if (!isUserFormValid || !isPetFormValid) {
         return;
       }
-
       try {
         const userResponse = await AuthService.register(
           userData,
           setAuthenticated
         );
         const userId = userResponse.userId;
-        const petDataWithOwner = { ...petData, owner: userId };
-        await AuthService.registerPet(userId, petDataWithOwner);
+        const petDataWithOwner = petData.map((pet) => ({
+          ...pet,
+          owner: userId,
+        }));
+        for (const pet of petDataWithOwner) {
+          await AuthService.registerPet(userId, pet);
+        }
         setAuthenticated(true);
         navigate("/appointments");
         console.log("User and pet registration successful!");
