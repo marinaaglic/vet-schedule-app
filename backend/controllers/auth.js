@@ -81,17 +81,16 @@ const logout = async (req, res) => {
 
 const petRegistration = async (req, res) => {
     const { userId } = req.params;
-    const { name, type, breed, age } = req.body;
-
-    if (!(name, type, breed, age)) {
-        res.status(400).send("All input fields are required.");
-    }
+    const { pets } = req.body;
 
     try {
-        const pet = new Pet({ name, breed, type, age, owner: userId });
-        await pet.save();
-        res.status(201).send({ pet });
+        const registeredPets = await Promise.all(pets.map(pet => {
+            const newPet = new Pet({ ...pet, owner: userId });
+            return newPet.save();
+        }));
+        res.status(201).send({ registeredPets });
     } catch (err) {
+        console.error('Error details:', err);
         res.status(400).send("Error while registering your pet. Please try again.");
     }
 

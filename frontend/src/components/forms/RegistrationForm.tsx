@@ -20,10 +20,8 @@ export default function RegistrationForm() {
     role: "owner" as const,
   });
 
-  const [petData, setPetData] = useState<Pet[]>([
-    { name: "", type: "", breed: "", age: 0, owner: "" },
-  ]);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [petData, setPetData] = useState<Pet[]>([]);
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const { setAuthenticated } = useContext(AuthContext) as AuthContextProps;
   const navigate = useNavigate();
   const { steps, currentStep, step, isFirstStep, isLastStep, back, next } =
@@ -45,29 +43,14 @@ export default function RegistrationForm() {
     setErrorMessage("");
     return true;
   }
-  function validatePetForm(petData: Pet[]) {
-    for (const pet of petData) {
-      if (
-        pet.name === "" ||
-        pet.type === "" ||
-        pet.breed === "" ||
-        pet.age === 0
-      ) {
-        setErrorMessage("All fields are required.");
-        return false;
-      }
-    }
-    setErrorMessage("");
-    return true;
-  }
+
   async function onSubmitHandler(event: FormEvent) {
     event.preventDefault();
 
     const isUserFormValid = validateUserForm(userData);
 
     if (isLastStep) {
-      const isPetFormValid = validatePetForm(petData);
-      if (!isUserFormValid || !isPetFormValid) {
+      if (!isUserFormValid) {
         return;
       }
       try {
@@ -80,12 +63,10 @@ export default function RegistrationForm() {
           ...pet,
           owner: userId,
         }));
-        for (const pet of petDataWithOwner) {
-          await AuthService.registerPet(userId, pet);
-        }
+        await AuthService.registerPet(userId, petDataWithOwner);
         setAuthenticated(true);
         navigate("/appointments");
-        console.log("User and pet registration successful!");
+        // console.log("User and pet registration successful!");
       } catch (error) {
         console.log("Registration failed: ", error);
       }

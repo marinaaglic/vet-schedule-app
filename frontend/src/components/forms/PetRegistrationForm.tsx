@@ -2,7 +2,8 @@ import Input from "../reusable/Input";
 import FormWrapper from "./FormWrapper";
 import "../../styles/_registrationForms.scss";
 import { Pet } from "../../types/pet";
-import { SetStateAction, ChangeEvent, Dispatch } from "react";
+import { SetStateAction, ChangeEvent, Dispatch, useState } from "react";
+
 interface PetRegistrationFormProps {
   petData: Pet[];
   setPetData: Dispatch<SetStateAction<Pet[]>>;
@@ -12,51 +13,95 @@ export default function PetRegistrationForm({
   petData,
   setPetData,
 }: PetRegistrationFormProps) {
+  const [currentPet, setCurrentPet] = useState<Pet>({
+    name: "",
+    type: "",
+    breed: "",
+    age: 0,
+    owner: "",
+  });
+
+  const [errorMessage, setErrorMessage] = useState<string>("");
+
   function changeHandler(
-    index: number,
     field: keyof Pet,
     event: ChangeEvent<HTMLInputElement>
   ) {
     const value = event.target.value;
-
-    setPetData((prevData) =>
-      prevData.map((pet, i) => (i === index ? { ...pet, [field]: value } : pet))
-    );
+    setCurrentPet((prevPet) => ({ ...prevPet, [field]: value }));
   }
+
+  function validateCurrentPetForm(): boolean {
+    if (
+      currentPet.name === "" ||
+      currentPet.type === "" ||
+      currentPet.breed === "" ||
+      currentPet.age <= 0
+    ) {
+      setErrorMessage("All fields are required.");
+      return false;
+    }
+    setErrorMessage("");
+    return true;
+  }
+
+  function addPet() {
+    if (!validateCurrentPetForm()) {
+      return;
+    }
+
+    setPetData((prevData) => [...prevData, currentPet]);
+    setCurrentPet({ name: "", type: "", breed: "", age: 0, owner: "" });
+  }
+
   return (
     <FormWrapper title="Pet Details">
-      {petData.map((pet, index) => (
-        <div key={index}>
-          <Input
-            type="text"
-            label="Pet's name"
-            id={`name-${index}`}
-            value={pet.name}
-            onChange={(value) => changeHandler(index, "name", value)}
-          />
-          <Input
-            type="text"
-            label="Type of Pet"
-            id={`type-${index}`}
-            value={pet.type}
-            onChange={(value) => changeHandler(index, "type", value)}
-          />
-          <Input
-            type="text"
-            label="Breed"
-            id={`breed-${index}`}
-            value={pet.breed}
-            onChange={(value) => changeHandler(index, "breed", value)}
-          />
-          <Input
-            type="number"
-            label="Age"
-            id={`age-${index}`}
-            value={pet.age}
-            onChange={(value) => changeHandler(index, "age", value)}
-          />
-        </div>
-      ))}
+      <div>
+        <Input
+          type="text"
+          label="Pet's name"
+          id="name"
+          value={currentPet.name}
+          onChange={(event) => changeHandler("name", event)}
+        />
+        <Input
+          type="text"
+          label="Type of Pet"
+          id="type"
+          value={currentPet.type}
+          onChange={(event) => changeHandler("type", event)}
+        />
+        <Input
+          type="text"
+          label="Breed"
+          id="breed"
+          value={currentPet.breed}
+          onChange={(event) => changeHandler("breed", event)}
+        />
+        <Input
+          type="number"
+          label="Age"
+          id="age"
+          value={currentPet.age}
+          onChange={(event) => changeHandler("age", event)}
+        />
+      </div>
+      <p className="error-message">{errorMessage}</p>
+      <button type="button" onClick={addPet}>
+        Add Pet
+      </button>
+      {petData.length > 0 && (
+        <>
+          <h3>Added Pets:</h3>
+          <ul>
+            {petData.map((pet, index) => (
+              <li key={index}>
+                {pet.name} ({pet.type}, {pet.breed}, {pet.age} years old)
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
     </FormWrapper>
   );
 }

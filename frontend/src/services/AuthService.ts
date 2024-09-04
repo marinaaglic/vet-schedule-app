@@ -14,18 +14,18 @@ const AuthService = {
       const { token, isAuthenticated } = response.data;
       localStorage.setItem("token", token);
       setAuthenticated(isAuthenticated);
-      console.log("Registration successful. Response:", response.data);
+      // console.log("Registration successful. Response:", response.data);
       return response.data;
     } catch (error: any) {
       throw error.response?.data || error.message;
     }
   },
 
-  registerPet: async (userId: string, petDetails: Pet) => {
+  registerPet: async (userId: string, petDetails: Pet[]) => {
     try {
       const response: AxiosResponse<AuthResponse> = await axios.post(
         `${baseURL}/register-pet/${userId}`,
-        petDetails
+        { pets: petDetails }
       );
       return response.data;
     } catch (error: any) {
