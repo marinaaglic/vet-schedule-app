@@ -95,7 +95,7 @@ export default function PetRegistrationForm({
         Add pet
       </button>
       {petData.length > 0 && (
-        <>
+        <div className="div-pets">
           <h3>Added Pets:</h3>
           <ul>
             {petData.map((pet, index) => (
@@ -107,7 +107,7 @@ export default function PetRegistrationForm({
               </li>
             ))}
           </ul>
-        </>
+        </div>
       )}
     </FormWrapper>
   );
