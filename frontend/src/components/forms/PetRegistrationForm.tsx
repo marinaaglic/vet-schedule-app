@@ -54,6 +54,10 @@ export default function PetRegistrationForm({
     setCurrentPet({ name: "", type: "", breed: "", age: 0, owner: "" });
   }
 
+  function removePet(index: number) {
+    setPetData((prevData) => prevData.filter((_, i) => i !== index));
+  }
+
   return (
     <FormWrapper title="Pet Details">
       <div>
@@ -87,8 +91,8 @@ export default function PetRegistrationForm({
         />
       </div>
       <p className="error-message">{errorMessage}</p>
-      <button type="button" onClick={addPet}>
-        Add Pet
+      <button type="button" onClick={addPet} className="btn-add">
+        Add pet
       </button>
       {petData.length > 0 && (
         <>
@@ -97,6 +101,9 @@ export default function PetRegistrationForm({
             {petData.map((pet, index) => (
               <li key={index}>
                 {pet.name} ({pet.type}, {pet.breed}, {pet.age} years old)
+                <button className="btn-remove" onClick={() => removePet(index)}>
+                  -
+                </button>
               </li>
             ))}
           </ul>
