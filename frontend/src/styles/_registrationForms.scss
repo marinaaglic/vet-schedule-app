@@ -33,6 +33,7 @@
   border: 0;
   font-size: 15px;
   cursor: pointer;
+  width: 100px;
 }
 
 .btn-remove {
@@ -42,7 +43,7 @@
   border-radius: 10px;
   font-family: "Poppins", sans-serif;
   border: 0;
-  font-size: 15px;
+  font-size: 13px;
   margin-left: 20px;
   cursor: pointer;
 }
@@ -87,16 +88,21 @@
 
 .div-pets {
   font-family: "Poppins", sans-serif;
+  max-height: 150px;
   ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
   }
   li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-color: white;
     padding: 4px;
     font-size: 13px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 4px;
   }
 }
