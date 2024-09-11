@@ -57,10 +57,8 @@
 
 .registration-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   height: auto;
   max-width: 500px;
   width: 100%;
@@ -73,10 +71,13 @@
 }
 
 .progress-bar-sidebar {
+  position: sticky;
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
   align-items: center;
   margin-right: 20px;
+  margin-top: 150px;
 }
 
 .error-message {
