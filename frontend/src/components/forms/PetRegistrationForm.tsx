@@ -101,7 +101,11 @@ export default function PetRegistrationForm({
             {petData.map((pet, index) => (
               <li key={index}>
                 {pet.name} ({pet.type}, {pet.breed}, {pet.age} years old)
-                <button className="btn-remove" onClick={() => removePet(index)}>
+                <button
+                  className="btn-remove"
+                  onClick={() => removePet(index)}
+                  title="Remove"
+                >
                   -
                 </button>
               </li>
