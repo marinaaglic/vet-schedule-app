@@ -22,7 +22,6 @@
 .div-user,
 .div-pet {
   border-radius: 5px;
-  padding: 10px;
   margin: 10px;
   font-family: "Poppins", sans-serif;
   background-color: white;
@@ -38,4 +37,17 @@
   @include medium {
     max-width: 300px;
   }
+}
+
+.btn-add-another-pet {
+  position: fixed;
+  bottom: 30px;
+  background-color: $secondary;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-family: "Poppins", sans-serif;
+  border: 0;
+  font-size: 15px;
+  cursor: pointer;
 }

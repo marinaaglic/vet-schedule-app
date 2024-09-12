@@ -39,6 +39,7 @@ function ProfilePage() {
           </div>
         ))}
       </div>
+      <button className="btn-add-another-pet">Add another pet</button>
     </div>
   );
 }
