@@ -3,10 +3,12 @@ import ProfileService from "../services/ProfileService";
 import { User } from "../types/user";
 import { Pet } from "../types/pet";
 import "../styles/_profilePage.scss";
+import Modal from "../components/reusable/Modal";
 
 function ProfilePage() {
   const [userData, setUserData] = useState<User>();
   const [petData, setPetData] = useState<Pet[]>();
+  const [showAddPetModal, setShowAddPetModal] = useState<boolean>(false);
   useEffect(() => {
     getInfo();
   }, []);
@@ -19,8 +21,19 @@ function ProfilePage() {
       console.error("Error fetching appointments:", error);
     }
   }
+
+  function addPetHandler() {}
+
   return (
     <div className="profile-container">
+      <Modal
+        title="Add pet"
+        open={showAddPetModal}
+        onClose={() => setShowAddPetModal(!showAddPetModal)}
+        onAction={addPetHandler}
+        buttonText="Add"
+        divText="Fill in the fields to add another pet!"
+      />
       <h2> Welcome {userData?.firstName}!</h2>
       <div className="div-profile">
         <div className="div-user">
@@ -39,7 +52,12 @@ function ProfilePage() {
           </div>
         ))}
       </div>
-      <button className="btn-add-another-pet">Add another pet</button>
+      <button
+        className="btn-add-another-pet"
+        onClick={() => setShowAddPetModal(!showAddPetModal)}
+      >
+        Add another pet
+      </button>
     </div>
   );
 }
