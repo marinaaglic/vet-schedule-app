@@ -4,7 +4,7 @@ import "../../styles/_registrationForms.scss";
 import { Pet } from "../../types/pet";
 import { SetStateAction, ChangeEvent, Dispatch, useState } from "react";
 
-interface PetRegistrationFormProps {
+export interface PetRegistrationFormProps {
   petData: Pet[];
   setPetData: Dispatch<SetStateAction<Pet[]>>;
 }

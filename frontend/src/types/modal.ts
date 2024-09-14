@@ -1,6 +1,8 @@
+import { ReactNode } from "react";
+
 export interface ModalProps {
   title: string;
-  divText: string;
+  divText: ReactNode;
   buttonText: string;
   open: boolean;
   onClose: () => void;
