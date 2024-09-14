@@ -34,7 +34,11 @@ function ProfilePage() {
         onAction={addPetHandler}
         buttonText="Add"
         divText={
-          <PetRegistrationForm petData={petData} setPetData={setPetData} />
+          <PetRegistrationForm
+            petData={petData}
+            setPetData={setPetData}
+            showAddedPets={false}
+          />
         }
       />
       <h2> Welcome {userData?.firstName}!</h2>

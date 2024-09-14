@@ -7,11 +7,13 @@ import { SetStateAction, ChangeEvent, Dispatch, useState } from "react";
 export interface PetRegistrationFormProps {
   petData: Pet[];
   setPetData: Dispatch<SetStateAction<Pet[]>>;
+  showAddedPets?: boolean;
 }
 
 export default function PetRegistrationForm({
   petData,
   setPetData,
+  showAddedPets,
 }: PetRegistrationFormProps) {
   const [currentPet, setCurrentPet] = useState<Pet>({
     name: "",
@@ -94,7 +96,7 @@ export default function PetRegistrationForm({
       <button type="button" onClick={addPet} className="btn-add">
         Add pet
       </button>
-      {petData.length > 0 && (
+      {showAddedPets && petData.length > 0 && (
         <div className="div-pets">
           <h3>Added Pets:</h3>
           <ul>
