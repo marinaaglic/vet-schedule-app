@@ -4,15 +4,16 @@ import { User } from "../types/user";
 import { Pet } from "../types/pet";
 import "../styles/_profilePage.scss";
 import Modal from "../components/reusable/Modal";
-import PetRegistrationForm from "../components/forms/PetRegistrationForm";
 
 function ProfilePage() {
   const [userData, setUserData] = useState<User>();
   const [petData, setPetData] = useState<Pet[]>([]);
   const [showAddPetModal, setShowAddPetModal] = useState<boolean>(false);
+
   useEffect(() => {
     getInfo();
   }, []);
+
   async function getInfo(): Promise<void> {
     try {
       const responseData = await ProfileService.getUserInfo();
@@ -23,24 +24,17 @@ function ProfilePage() {
     }
   }
 
-  function addPetHandler() {}
-
   return (
     <div className="profile-container">
       <Modal
         title="Add pet"
         open={showAddPetModal}
-        onClose={() => setShowAddPetModal(!showAddPetModal)}
-        onAction={addPetHandler}
+        onClose={() => setShowAddPetModal(false)}
+        onAction={() => {}}
         buttonText="Add"
-        divText={
-          <PetRegistrationForm
-            petData={petData}
-            setPetData={setPetData}
-            showAddedPets={false}
-          />
-        }
-      />
+      >
+        <h1></h1>
+      </Modal>
       <h2> Welcome {userData?.firstName}!</h2>
       <div className="div-profile">
         <div className="div-user">

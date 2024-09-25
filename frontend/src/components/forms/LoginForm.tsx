@@ -32,10 +32,10 @@ export default function LoginForm() {
 
     if (user.email !== "" && user.password !== "") {
       try {
-        const authResponse = await AuthService.login(user, setAuthenticated);
+        await AuthService.login(user, setAuthenticated);
         setAuthenticated(true);
         navigate("/appointments");
-        console.log("Login successful. Response:", authResponse);
+        //console.log("Login successful. Response:", authResponse);
       } catch (error) {
         console.log("Login failed: ", error);
         setError("Invalid e-mail or password.");

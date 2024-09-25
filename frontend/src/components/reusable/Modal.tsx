@@ -3,7 +3,7 @@ import "../../styles/_modal.scss";
 
 export default function Modal({
   title,
-  divText,
+  children,
   buttonText,
   open,
   onClose,
@@ -18,7 +18,7 @@ export default function Modal({
         <div className="modal-head">
           <h2>{title}</h2>
         </div>
-        <div className="modal-body">{divText}</div>
+        <div className="modal-body">{children}</div>
         <div className="btn-container">
           <button type="button" className="btn-close" onClick={onClose}>
             Close

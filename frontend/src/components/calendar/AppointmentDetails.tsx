@@ -46,6 +46,7 @@ export default function AppointmentDetails({
     try {
       await AppointmentService.deleteAppointment(appointmentId);
       setShowAppointmentDetails(false);
+      setShowDeleteModal(false);
     } catch (error) {
       console.log("Error while deleting appointment:", error);
     }
@@ -58,6 +59,7 @@ export default function AppointmentDetails({
       );
       setAppointmentDetails(appointmentResponse);
       setIsReadonly(true);
+      setShowUpdateModal(false);
     } catch (error) {
       console.log("Appointment schedule failed: ", error);
     }
@@ -78,16 +80,18 @@ export default function AppointmentDetails({
         onClose={() => setShowDeleteModal(!showDeleteModal)}
         onAction={deleteAppointmentHandler}
         buttonText="Delete"
-        divText="Are you sure you want to delete this appointment?"
-      />
+      >
+        <div>Are you sure you want to delete this appointment?</div>
+      </Modal>
       <Modal
         title="Update Appointment"
         open={showUpdateModal}
         onClose={() => setShowUpdateModal(!showUpdateModal)}
         onAction={updateAppointmentHandler}
         buttonText="Update"
-        divText="Are you sure you want to make changes to this appointment?"
-      />
+      >
+        Are you sure you want to make changes to this appointment?
+      </Modal>
       <div className="icons-container">
         <FaEdit
           className="icon-edit"
