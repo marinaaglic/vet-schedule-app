@@ -14,7 +14,7 @@ export default function Modal({
       className={`${"modal"} ${open ? "display-block" : "display-none"}`}
       onClick={onClose}
     >
-      <div className="modal-main">
+      <div className="modal-main" onClick={(e) => e.stopPropagation()}>
         <div className="modal-head">
           <h2>{title}</h2>
         </div>
