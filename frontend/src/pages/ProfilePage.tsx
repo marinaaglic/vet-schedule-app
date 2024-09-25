@@ -27,13 +27,13 @@ function ProfilePage() {
   return (
     <div className="profile-container">
       <Modal
-        title="Add pet"
+        title="Add Pet"
         open={showAddPetModal}
         onClose={() => setShowAddPetModal(false)}
         onAction={() => {}}
         buttonText="Add"
       >
-        <h1></h1>
+        <h1>Pet Registration Form</h1>
       </Modal>
       <h2> Welcome {userData?.firstName}!</h2>
       <div className="div-profile">
@@ -55,7 +55,7 @@ function ProfilePage() {
       </div>
       <button
         className="btn-add-another-pet"
-        onClick={() => setShowAddPetModal(!showAddPetModal)}
+        onClick={() => setShowAddPetModal(true)}
       >
         Add another pet
       </button>

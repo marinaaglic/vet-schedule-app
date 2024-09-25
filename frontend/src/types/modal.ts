@@ -6,5 +6,5 @@ export interface ModalProps {
   buttonText?: string;
   open: boolean;
   onClose: () => void;
-  onAction: () => void;
+  onAction?: () => void;
 }
