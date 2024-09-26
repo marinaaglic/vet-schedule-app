@@ -66,7 +66,6 @@ export default function RegistrationForm() {
         await AuthService.registerPet(userId, petDataWithOwner);
         setAuthenticated(true);
         navigate("/appointments");
-        // console.log("User and pet registration successful!");
       } catch (error) {
         console.log("Registration failed: ", error);
       }

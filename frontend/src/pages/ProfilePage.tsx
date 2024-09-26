@@ -4,8 +4,8 @@ import { User } from "../types/user";
 import { Pet } from "../types/pet";
 import "../styles/_profilePage.scss";
 import Modal from "../components/reusable/Modal";
-import Input from "../components/reusable/Input"; // assuming you have a reusable Input component
-import AuthService from "../services/AuthService"; // service for API calls
+import Input from "../components/reusable/Input";
+import AuthService from "../services/AuthService";
 
 function ProfilePage() {
   const [userData, setUserData] = useState<User>();

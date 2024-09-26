@@ -14,7 +14,6 @@ const AuthService = {
       const { token, isAuthenticated } = response.data;
       localStorage.setItem("token", token);
       setAuthenticated(isAuthenticated);
-      // console.log("Registration successful. Response:", response.data);
       return response.data;
     } catch (error: any) {
       throw error.response?.data || error.message;
@@ -45,7 +44,6 @@ const AuthService = {
       const { token, isAuthenticated } = response.data;
       localStorage.setItem("token", token);
       setAuthenticated(isAuthenticated);
-      // console.log("Login successful. Response:", response.data);
       return response.data;
     } catch (error: any) {
       throw error.response?.data || error.message;

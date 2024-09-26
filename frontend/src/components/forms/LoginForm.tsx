@@ -35,7 +35,6 @@ export default function LoginForm() {
         await AuthService.login(user, setAuthenticated);
         setAuthenticated(true);
         navigate("/appointments");
-        //console.log("Login successful. Response:", authResponse);
       } catch (error) {
         console.log("Login failed: ", error);
         setError("Invalid e-mail or password.");
