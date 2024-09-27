@@ -61,6 +61,23 @@ const AuthService = {
       throw error.response?.data || error.message;
     }
   },
+  validateToken: async (token: string) => {
+    try {
+      const response = await axios.post(
+        "/api/auth/validate-token",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return response.status === 200;
+    } catch (error) {
+      console.error("Token validation failed:", error);
+      return false;
+    }
+  },
 };
 
 export default AuthService;

@@ -96,4 +96,27 @@ const petRegistration = async (req, res) => {
 
 }
 
-module.exports = { register, login, logout, petRegistration };
+const validateToken = async (req, res) => {
+    const token = req.header("Authorization");
+
+    if (!token) {
+        return res.status(401).send("Token not provided.");
+    }
+
+    try {
+        const justToken = token.replace("Bearer ", "");
+
+        const isTokenBlacklisted = await BlacklistedToken.findOne({ token: justToken });
+        if (isTokenBlacklisted) {
+            return res.status(401).send("Token revoked.");
+        }
+
+        const verified = jwt.verify(justToken, process.env.TOKEN_KEY);
+
+        res.status(200).send("Token is valid.");
+    } catch (err) {
+        res.status(400).send(`Invalid token. Error: ${err.message}`);
+    }
+};
+
+module.exports = { register, login, logout, petRegistration, validateToken };

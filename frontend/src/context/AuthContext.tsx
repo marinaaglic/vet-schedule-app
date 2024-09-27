@@ -1,4 +1,5 @@
 import { ReactNode, createContext, useState, useEffect } from "react";
+import AuthService from "../services/AuthService";
 
 export interface AuthContextProps {
   isAuthenticated: boolean;
@@ -17,14 +18,26 @@ export const AuthContext = createContext<AuthContextProps>({
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    setIsAuthenticated(!!token);
-    setIsLoading(false);
+    const validateToken = async () => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        const isValid = await AuthService.validateToken(token);
+        setIsAuthenticated(isValid);
+      } else {
+        setIsAuthenticated(false);
+      }
+      setIsLoading(false);
+    };
+
+    validateToken();
   }, []);
+
   const setAuthenticated = (value: boolean) => {
     setIsAuthenticated(value);
   };
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
