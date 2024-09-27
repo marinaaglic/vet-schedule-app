@@ -55,6 +55,7 @@ const AuthService = {
       await axios.get(`${baseURL}/logout`, {
         headers: { Authorization: `Bearer ${token}` },
       });
+      localStorage.removeItem("token");
       setAuthenticated(false);
     } catch (error: any) {
       throw error.response?.data || error.message;
